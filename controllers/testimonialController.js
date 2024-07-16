@@ -1,8 +1,5 @@
 const Testimonial = require("../models/Testimonial");
 
-
-
-
 // exports.createTestimonial = async (req, res) => {
 //   try {
 //     console.log("Starting createTestimonial");
@@ -27,13 +24,6 @@ exports.createTestimonial = async (req, res) => {
   try {
     console.log("Starting createTestimonial");
     const { clientName, occupation, review, rating } = req.body;
-    console.log("Request body:", req.body);
-    console.log("File:", req.file);
-
-    if (!req.file) {
-      throw new Error("Client profile image is required.");
-    }
-
     const testimonial = new Testimonial({
       clientName,
       clientProfile: req.file.path,
@@ -41,18 +31,14 @@ exports.createTestimonial = async (req, res) => {
       review,
       rating,
     });
-
     await testimonial.save();
     console.log("Testimonial created successfully");
     res.status(201).json(testimonial);
   } catch (err) {
-    console.error("Error creating testimonial:", err);
-    res.status(500).json({ error: err.message });
+    console.error("Error creating testimonial:", err.message);
+    res.status(400).json({ error: err.message });
   }
 };
-
-
-
 
 exports.getTestimonials = async (req, res) => {
   try {
