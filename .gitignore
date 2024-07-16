@@ -1,0 +1,14 @@
+# Node.js
+node_modules/
+# Env
+ironment variables
+.env
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Optional npm cache directory
+.npm
+
+
